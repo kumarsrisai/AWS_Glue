@@ -19,51 +19,63 @@ POLICY
 }
 # S3 bucket to store Raw Data
 resource "aws_s3_bucket" "example1" {
-  bucket = "ddsl-rawdata-bucket"
+  bucket = var.s3_bucket1
   # Prevent accidental deletion of this S3 bucket
   lifecycle {
     prevent_destroy = false
   }
    tags = {
-    Name        = "ddsl-rawdata-bucket"
+    Name        = var.s3_bucket1
     Environment = "Dev"
   }
 }
 
 # S3 bucket to store Segregated Data
 resource "aws_s3_bucket" "example2" {
-  bucket = "ddsl-extension-bucket"
+  bucket = var.s3_bucket2
   # Prevent accidental deletion of this S3 bucket
   lifecycle {
     prevent_destroy = false
   }
    tags = {
-    Name        = "ddsl-extension-bucket"
+    Name        = var.s3_bucket2
     Environment = "Dev"
   }
 }
 
 # S3 bucket to store DQ1 Data
 resource "aws_s3_bucket" "example3" {
-  bucket = "ddsl-dq1"
+  bucket = var.s3_bucket3
   # Prevent accidental deletion of this S3 bucket
   lifecycle {
     prevent_destroy = false
   }
    tags = {
-    Name        = "ddsl-dq1"
+    Name        = var.s3_bucket3
     Environment = "Dev"
   }
 }
 # S3 bucket to store DQ1 Data
 resource "aws_s3_bucket" "example4" {
-  bucket = "ddsl-dq2"
+  bucket = var.s3_bucket4
   # Prevent accidental deletion of this S3 bucket  
   lifecycle {
     prevent_destroy = false
   }
    tags = {
-    Name        = "ddsl-dq2"
+    Name        = var.s3_bucket4
+    Environment = "Dev"
+  }
+}
+
+resource "aws_s3_bucket" "example5" {
+  bucket = var.s3_bucket5
+  # Prevent accidental deletion of this S3 bucket  
+  lifecycle {
+    prevent_destroy = false
+  }
+   tags = {
+    Name        = var.s3_bucket5
     Environment = "Dev"
   }
 }
