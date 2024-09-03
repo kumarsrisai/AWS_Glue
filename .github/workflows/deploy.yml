@@ -1,4 +1,4 @@
-name: Configure AWS Credentials and Deploy
+name: Configure AWS Credentials and Deploy S3 Resources
 
 on:
   push:
@@ -29,23 +29,35 @@ jobs:
         with:
           terraform_version: 1.9.5  # Latest version as of now
 
-      - name: Terraform Init with Migration Check
-        run: |
-          if terraform init -migrate-state; then
-            echo "State migration successful."
-          else
-            echo "State migration failed. Running without migration."
-            terraform init
-          fi
-      
-      - name: Terrafrom Validate    
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate    
         run: terraform validate
         
-      - name: Terraform Plan
-        run: terraform plan
+      - name: Terraform Plan (S3 Only)
+        run: terraform plan \
+             -target=aws_s3_bucket.bucket1 \
+             -target=aws_s3_bucket.bucket2 \
+             -target=aws_s3_bucket.bucket3 \
+             -target=aws_s3_bucket.bucket4 \
+             -target=aws_s3_bucket.bucket5 \
+             -target=aws_s3_object.bucket1_folders
 
-      - name: Terraform Apply
-        run: terraform apply -auto-approve
+      - name: Terraform Apply (S3 Only)
+        run: terraform apply -auto-approve \
+             -target=aws_s3_bucket.bucket1 \
+             -target=aws_s3_bucket.bucket2 \
+             -target=aws_s3_bucket.bucket3 \
+             -target=aws_s3_bucket.bucket4 \
+             -target=aws_s3_bucket.bucket5 \
+             -target=aws_s3_object.bucket1_folders
         
-#      - name: Terraform Destroy
-#        run: terraform destroy -auto-approve
+#      - name: Terraform Destroy (S3 Only)
+#        run: terraform destroy -auto-approve \
+#             -target=aws_s3_bucket.bucket1 \
+#             -target=aws_s3_bucket.bucket2 \
+#             -target=aws_s3_bucket.bucket3 \
+#             -target=aws_s3_bucket.bucket4 \
+#             -target=aws_s3_bucket.bucket5 \
+#             -target=aws_s3_object.bucket1_folders
