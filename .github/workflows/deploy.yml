@@ -42,7 +42,7 @@ jobs:
              -target=aws_s3_bucket.bucket3 \
              -target=aws_s3_bucket.bucket4 \
              -target=aws_s3_bucket.bucket5 \
-             -target=aws_s3_object.bucket1_folders
+            #  -target=aws_s3_object.bucket1_folders
 
       - name: Terraform Apply (S3 Only)
         run: terraform apply -auto-approve \
@@ -51,7 +51,7 @@ jobs:
              -target=aws_s3_bucket.bucket3 \
              -target=aws_s3_bucket.bucket4 \
              -target=aws_s3_bucket.bucket5 \
-             -target=aws_s3_object.bucket1_folders
+            #  -target=aws_s3_object.bucket1_folders
         
 #      - name: Terraform Destroy (S3 Only)
 #        run: terraform destroy -auto-approve \
